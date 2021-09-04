@@ -13,7 +13,8 @@ RSpec.describe "Application new page" do
     visit '/pets'
 
     click_link('Start an Application')
-
+    expect(current_path).to eq('/applications/new')
+    
     fill_in('Name', with: 'Katie Crutchfield')
     fill_in('Street', with: 'Lilac Ln')
     fill_in('City', with: 'Saint Cloud')
@@ -22,10 +23,10 @@ RSpec.describe "Application new page" do
 
     click_button('Submit')
 
-    expect(current_path).to eq("/applications/#{Application.all.last.id}")
+    expect(current_path).to eq("/applications/#{Application.last.id}")
     expect(page).to have_content("Katie Crutchfield")
-    expect(page).to have_content("Katie Crutchfield")
-    expect(page).to have_content("Katie Crutchfield")
-    expect(page).to have_content(Application.all.last.status)
+    expect(page).to have_content("Lilac Ln")
+    expect(page).to have_content("Saint Cloud")
+    expect(page).to have_content("In Progress")
   end
 end
