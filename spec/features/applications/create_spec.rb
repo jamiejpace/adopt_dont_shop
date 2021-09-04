@@ -10,7 +10,9 @@ RSpec.describe "Application new page" do
   end
 
   it 'has a form to create a new application' do
-    visit '/applications/new'
+    visit '/pets'
+
+    click_link('Start an Application')
 
     fill_in('Name', with: 'Katie Crutchfield')
     fill_in('Street', with: 'Lilac Ln')
@@ -22,6 +24,8 @@ RSpec.describe "Application new page" do
 
     expect(current_path).to eq("/applications/#{Application.all.last.id}")
     expect(page).to have_content("Katie Crutchfield")
-    expect(page).to have_content("In Progress")
+    expect(page).to have_content("Katie Crutchfield")
+    expect(page).to have_content("Katie Crutchfield")
+    expect(page).to have_content(Application.all.last.status)
   end
 end

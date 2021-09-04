@@ -4,6 +4,7 @@ class ApplicationsController < ApplicationController
   end
 
   def new
+    @application = Application.new
   end
 
   def create
@@ -13,6 +14,6 @@ class ApplicationsController < ApplicationController
 
 private
   def application_params
-    params.permit(:name, :street, :city, :state, :zip_code, :description, :status)
+    params.require(:application).permit(:name, :street, :city, :state, :zip_code, :description, :status)
   end
 end
