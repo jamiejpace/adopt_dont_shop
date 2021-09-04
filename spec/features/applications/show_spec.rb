@@ -58,4 +58,28 @@ RSpec.describe "Application show page" do
       expect(page).to have_content("Odell")
     end
   end
+
+  it 'has a submit section once you have added pets to application' do
+    visit "/applications/#{@application.id}"
+
+    within('#Add_pet') do
+      expect(page).to have_content("Add a Pet to this Application")
+
+      fill_in('Search by pet name', with: 'Odell')
+
+      click_button('Submit')
+
+      expect(current_path).to eq("/applications/#{@application.id}")
+
+      click_button('Adopt this Pet')
+    end
+
+    expect(page).to have_content("Submit my Application")
+
+    fill_in('Why I would make a good pet owner', with: 'I love dogs')
+
+    click_button("Submit My Application")
+
+    expect(current_path).to eq("/applications/#{@application.id}")
+  end
 end
