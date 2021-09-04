@@ -1,0 +1,14 @@
+<%= form_with model: @application, method: :post, local: true do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :street%>
+  <%= form.text_field :street %>
+  <%= form.label :city %>
+  <%= form.text_field :city %>
+  <%= form.label :state %>
+  <%= form.text_field :state %>
+  <%= form.label :zip_code %>
+  <%= form.text_field :zip_code %>
+
+  <%= form.submit "Submit"%>
+<% end %>
