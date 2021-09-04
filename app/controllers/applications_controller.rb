@@ -9,9 +9,9 @@ class ApplicationsController < ApplicationController
 
   def create
     application = Application.create(application_params)
-    require 'pry'; binding.pry
     if application.id.nil?
       redirect_to "/applications/new"
+      flash[:alert] = "Error: #{error_message(application.errors)}"
     else
       redirect_to "/applications/#{application.id}"
     end

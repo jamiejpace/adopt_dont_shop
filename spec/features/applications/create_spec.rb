@@ -34,9 +34,15 @@ RSpec.describe "Application new page" do
     visit '/applications/new'
 
     fill_in('Name', with: 'Phoebe Bridgers')
+    fill_in('City', with: 'Saint Cloud')
+    fill_in('State', with: 'Florida')
+    fill_in('Zip code', with: '3312')
 
     click_button('Submit')
 
     expect(current_path).to eq('/applications/new')
+    expect(page).to have_content("Error")
+    expect(page).to have_content("Street can't be blank")
+    expect(page).to have_content("Zip code is the wrong length")
   end
 end
