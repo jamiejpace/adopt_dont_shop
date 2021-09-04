@@ -9,12 +9,12 @@ RSpec.describe "Application new page" do
     expect(current_path).to eq('/applications/new')
   end
 
-  it 'has a form to create a new application' do
+  it 'has a form to create a new application and a default status of in progress' do
     visit '/pets'
 
     click_link('Start an Application')
     expect(current_path).to eq('/applications/new')
-    
+
     fill_in('Name', with: 'Katie Crutchfield')
     fill_in('Street', with: 'Lilac Ln')
     fill_in('City', with: 'Saint Cloud')
@@ -28,5 +28,15 @@ RSpec.describe "Application new page" do
     expect(page).to have_content("Lilac Ln")
     expect(page).to have_content("Saint Cloud")
     expect(page).to have_content("In Progress")
+  end
+
+  it 'takes you back to the new application field with messages to complete fields if all fields not filled in' do
+    visit '/applications/new'
+
+    fill_in('Name', with: 'Phoebe Bridgers')
+
+    click_button('Submit')
+
+    expect(current_path).to eq('/applications/new')
   end
 end

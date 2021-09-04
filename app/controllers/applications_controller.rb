@@ -9,7 +9,12 @@ class ApplicationsController < ApplicationController
 
   def create
     application = Application.create(application_params)
-    redirect_to "/applications/#{application.id}"
+    require 'pry'; binding.pry
+    if application.id.nil?
+      redirect_to "/applications/new"
+    else
+      redirect_to "/applications/#{application.id}"
+    end
   end
 
 private
