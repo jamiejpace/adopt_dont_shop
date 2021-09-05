@@ -14,4 +14,14 @@ class Application < ApplicationRecord
   def in_progress?
     status == "In Progress"
   end
+
+  def pending?
+    status == "Pending"
+  end
+
+  def self.find_pending_apps
+    joins(:pets).where(status: "Pending")
+  end
+
+
 end
