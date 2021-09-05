@@ -12,20 +12,31 @@
 </section>
 
 <section id="Add_pet">
-<h3>Add a Pet to this Application</h3>
-<%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
-  <%= form.label :search_by_pet_name %>
-  <%= form.text_field :search_by_pet_name %>
+<% if @application.in_progress? %>
+  <h3>Add a Pet to this Application</h3>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+    <%= form.label :search_by_pet_name %>
+    <%= form.text_field :search_by_pet_name %>
 
-  <%= form.submit "Submit" %>
+    <%= form.submit "Submit" %>
+  <% end %>
+
+    <p><% @pets.each do |pet|%></p>
+    <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+    <%= button_to "Adopt this Pet", pet_applications_path, method: :post, params: {:application_id => @application.id, :pet_id => pet.id} %></p>
+  <% end  %>
 <% end %>
-
-<p><% @pets.each do |pet|%></p>
-  <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
-     <%= button_to "Adopt this Pet", pet_applications_path, method: :post, params: {:application_id => @application.id, :pet_id => pet.id} %></p>
-<% end  %>
 </section>
 
-<p><% if @application.has_pets %>
-      <%= render "submit" %>
-  <% end %></p>
+<section id="Submit_application">
+<% if @application.has_pets && @application.in_progress? %>
+  <h3>Submit Application</h3>
+  <p> Please describe why you would be a good pet owner</p>
+  <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+
+    <%= form.submit "Submit My Application" %>
+  <% end %>
+<% end %>
+</section>

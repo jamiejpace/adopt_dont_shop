@@ -5,7 +5,7 @@ RSpec.describe "Application show page" do
     @shelter = Shelter.create(name: 'Platt Park Shelter', city: 'Denver, CO', foster_program: false, rank: 3)
     @pet_1 = Pet.create(adoptable: true, age: 4, breed: 'poodle', name: 'Odell', shelter_id: @shelter.id)
     @pet_2 = Pet.create(adoptable: true, age: 6, breed: 'rottweiler', name: 'Mose', shelter_id: @shelter.id)
-    @application = Application.create(name: 'Jamie', street: '123 S Pearl St', state: "Colorado", city: "Denver", zip_code: "80212", description: "Really loves dogs", status: "Pending")
+    @application = Application.create(name: 'Jamie', street: '123 S Pearl St', state: "Colorado", city: "Denver", zip_code: "80212")
   end
 
   it 'displays the applicant name, full address, description, name of all pets applied for and application status' do
@@ -72,14 +72,21 @@ RSpec.describe "Application show page" do
       expect(current_path).to eq("/applications/#{@application.id}")
 
       click_button('Adopt this Pet')
+      expect(current_path).to eq("/applications/#{@application.id}")
     end
 
-    expect(page).to have_content("Submit Application")
+    within('#Submit_application') do
+      expect(page).to have_content("Submit Application")
 
-    fill_in('Why I would make a good pet owner', with: 'I love dogs')
+      fill_in('Description', with: 'I love dogs')
 
-    click_button("Submit My Application")
+      click_button("Submit My Application")
 
-    expect(current_path).to eq("/applications/#{@application.id}")
+      expect(current_path).to eq("/applications/#{@application.id}")
+    end
+
+    expect(page).to have_content("Pending")
+    expect(page).to_not have_content("Submit My Application")
+    expect(page).to_not have_content("Add a Pet to this Application")
   end
 end

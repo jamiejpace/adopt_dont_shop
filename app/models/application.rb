@@ -10,4 +10,8 @@ class Application < ApplicationRecord
   def has_pets
     pets.count >= 1
   end
+
+  def in_progress?
+    status == "In Progress"
+  end
 end
