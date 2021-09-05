@@ -10,7 +10,8 @@ class Shelter < ApplicationRecord
   end
 
   def self.rev_alph
-    order(name: :desc)
+    # order(name: :desc)
+    find_by_sql("SELECT * FROM shelters ORDER BY shelters.name desc")
   end
 
   def self.order_by_number_of_pets
