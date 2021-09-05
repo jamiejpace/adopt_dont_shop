@@ -1,7 +1,6 @@
 class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
-    require 'pry'; binding.pry
     if params[:search_by_pet_name].present?
       @pets = Pet.search(params[:search_by_pet_name])
     else
@@ -24,6 +23,10 @@ class ApplicationsController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    require 'pry'; binding.pry
   end
 
 private

@@ -6,7 +6,6 @@ RSpec.describe "Application show page" do
     @pet_1 = Pet.create(adoptable: true, age: 4, breed: 'poodle', name: 'Odell', shelter_id: @shelter.id)
     @pet_2 = Pet.create(adoptable: true, age: 6, breed: 'rottweiler', name: 'Mose', shelter_id: @shelter.id)
     @application = Application.create(name: 'Jamie', street: '123 S Pearl St', state: "Colorado", city: "Denver", zip_code: "80212", description: "Really loves dogs", status: "Pending")
-    PetApplication.create!(pet: @pet_1, application: @application)
   end
 
   it 'displays the applicant name, full address, description, name of all pets applied for and application status' do
@@ -64,6 +63,7 @@ RSpec.describe "Application show page" do
 
     within('#Add_pet') do
       expect(page).to have_content("Add a Pet to this Application")
+      expect(page).to_not have_content("Submit my Application")
 
       fill_in('Search by pet name', with: 'Odell')
 
@@ -74,7 +74,7 @@ RSpec.describe "Application show page" do
       click_button('Adopt this Pet')
     end
 
-    expect(page).to have_content("Submit my Application")
+    expect(page).to have_content("Submit Application")
 
     fill_in('Why I would make a good pet owner', with: 'I love dogs')
 

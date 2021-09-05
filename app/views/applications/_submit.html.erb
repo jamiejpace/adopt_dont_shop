@@ -1,0 +1,7 @@
+<h3>Submit Application</h3>
+<%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
+  <%= form.label :Why_I_would_make_a_good_pet_owner %>
+  <%= form.text_field :Why_I_would_make_a_good_pet_owner %>
+
+  <%= form.submit "Submit My Application" %>
+<% end %>

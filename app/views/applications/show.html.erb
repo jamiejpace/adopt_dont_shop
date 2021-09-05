@@ -25,3 +25,7 @@
      <%= button_to "Adopt this Pet", pet_applications_path, method: :post, params: {:application_id => @application.id, :pet_id => pet.id} %></p>
 <% end  %>
 </section>
+
+<p><% if @application.has_pets %>
+      <%= render "submit" %>
+  <% end %></p>
