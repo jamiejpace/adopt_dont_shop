@@ -17,7 +17,6 @@ RSpec.describe "Application show page" do
     expect(page).to have_content(@application.city)
     expect(page).to have_content(@application.zip_code)
     expect(page).to have_content(@application.description)
-    expect(page).to have_content(@application.pets.first.name)
     expect(page).to have_content(@application.status)
   end
 
@@ -28,6 +27,36 @@ RSpec.describe "Application show page" do
       expect(page).to have_content("Add a Pet to this Application")
 
       fill_in('Search by pet name', with: 'Odell')
+
+      click_button('Submit')
+
+      expect(current_path).to eq("/applications/#{@application.id}")
+      expect(page).to have_content("Odell")
+    end
+  end
+
+  it 'can search for partial matches to add to application' do
+    visit "/applications/#{@application.id}"
+
+    within('#Add_pet') do
+      expect(page).to have_content("Add a Pet to this Application")
+
+      fill_in('Search by pet name', with: 'Ode')
+
+      click_button('Submit')
+
+      expect(current_path).to eq("/applications/#{@application.id}")
+      expect(page).to have_content("Odell")
+    end
+  end
+
+  it 'can search for case insensitive matches to add to application' do
+    visit "/applications/#{@application.id}"
+
+    within('#Add_pet') do
+      expect(page).to have_content("Add a Pet to this Application")
+
+      fill_in('Search by pet name', with: 'odell')
 
       click_button('Submit')
 
