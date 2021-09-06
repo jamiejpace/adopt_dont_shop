@@ -23,5 +23,14 @@ class Application < ApplicationRecord
     joins(:pets).where(status: "Pending")
   end
 
-
+  def update_status
+    statuses = pet_applications.pluck(:application_status)
+    if statuses.include?("Rejected")
+      update(status: "Rejected")
+    elsif statuses.all?("Approved")
+      update(status: "Approved")
+    else
+      update(status: "Pending")
+    end
+  end
 end
