@@ -37,7 +37,6 @@ RSpec.describe "Application new page" do
     fill_in('City', with: 'Saint Cloud')
     fill_in('State', with: 'Florida')
     fill_in('Zip code', with: '3312')
-
     click_button('Submit')
 
     expect(current_path).to eq('/applications/new')
