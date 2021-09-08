@@ -7,13 +7,13 @@ RSpec.describe Application do
   end
 
   describe 'validations' do
-      it { should validate_presence_of(:name) }
-      it { should validate_presence_of(:street) }
-      it { should validate_presence_of(:city) }
-      it { should validate_presence_of(:state) }
-      it { should validate_presence_of(:zip_code) }
-      it { should validate_numericality_of(:zip_code) }
-      it { should validate_length_of(:zip_code) }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:street) }
+    it { should validate_presence_of(:city) }
+    it { should validate_presence_of(:state) }
+    it { should validate_presence_of(:zip_code) }
+    it { should validate_numericality_of(:zip_code) }
+    it { should validate_length_of(:zip_code) }
   end
 
   describe 'instance methods' do
@@ -59,7 +59,6 @@ RSpec.describe Application do
          PetApplication.create(pet_id: pet_1.id, application_id: application1.id, application_status: "Rejected")
          PetApplication.create(pet_id: pet_1.id, application_id: application2.id, application_status: "Approved")
          PetApplication.create(pet_id: pet_2.id, application_id: application3.id, application_status: "Pending")
-
 
          application2.update_status
          application1.update_status
