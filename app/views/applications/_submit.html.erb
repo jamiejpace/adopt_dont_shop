@@ -1,8 +1,0 @@
-<h3>Submit Application</h3>
-<p> Please describe why you would be a good pet owner</p>
-<%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
-  <%= form.label :description %>
-  <%= form.text_field :description %>
-
-  <%= form.submit "Submit My Application" %>
-<% end %>

@@ -6,8 +6,8 @@ RSpec.describe 'admin applications show page' do
     pet_1 = Pet.create(adoptable: true, age: 4, breed: 'poodle', name: 'Odell', shelter_id: shelter_1.id)
     pet_4 = Pet.create(adoptable: true, age: 2, breed: 'aussie', name: 'Huxley', shelter_id: shelter_1.id)
     application_1 = Application.create(name: 'Jamie', street: '123 S Pearl St', state: "Colorado", city: "Denver", zip_code: "80212", description: "I love dogs", status: "Pending")
-    PetApplication.create(pet: pet_1, application: application_1)
-    
+    PetApplication.create(pet_id: pet_1.id, application_id: application_1.id)
+
     visit "/admin/applications/#{application_1.id}"
     save_and_open_page
     click_button("Approve Application for #{pet_1.name}")

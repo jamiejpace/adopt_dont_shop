@@ -16,8 +16,6 @@ RSpec.describe "Application show page" do
     expect(page).to have_content(@application.state)
     expect(page).to have_content(@application.city)
     expect(page).to have_content(@application.zip_code)
-    expect(page).to have_content(@application.description)
-    expect(page).to have_content(@application.status)
   end
 
   it 'can search for pets to add to application' do
